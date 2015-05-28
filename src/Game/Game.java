@@ -6,20 +6,20 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.TextArea;
-import java.awt.Toolkit;
-import java.awt.geom.Ellipse2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+//import java.awt.MouseInfo;
+//ort java.awt.Point;
+//import java.awt.PointerInfo;
+//import java.awt.TextArea;
+//import java.awt.Toolkit;
+//import java.awt.geom.Ellipse2D;
+//import java.awt.image.BufferedImage;
+//import java.io.IOException;
 
-import javax.imageio.ImageIO;
+//import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
+//import javax.swing.JTextPane;
 
 
 @SuppressWarnings("serial")
@@ -76,7 +76,7 @@ public class Game extends JPanel
 			Thread.sleep(10);
 		}
 	}
-	
+	public Image img1 = new ImageIcon(this.getClass().getResource("/Textures/Thing.png")).getImage();
 	
 	@Override
 	public void paint(Graphics g) 
@@ -86,13 +86,13 @@ public class Game extends JPanel
 		g2d.fillRect(0,0,frame.getWidth(), frame.getHeight());
 		g2d.setColor(Color.BLACK);
 		//g2d.drawString("Hi", 50, 50);
-		ClassLoader cldr = this.getClass().getClassLoader();
+		//ClassLoader cldr = this.getClass().getClassLoader();
 
 	    //java.net.URL imageURL   = cldr.getResource("/Textures/Thing.png");
 	    //BufferedImage Thing = null;
 		//Thing = ImageIO.read(imageURL);
 		//Image img1 = Toolkit.getDefaultToolkit().getImage("/Textures/Thing.png");
-		Image img1 = new ImageIcon(this.getClass().getResource("/Textures/Thing.png")).getImage();
+		
 		g2d.drawImage(img1, player.xPos, player.yPos, this);
 
 		//g2d.draw(new Ellipse2D.Double(0, 100, 30, 30));

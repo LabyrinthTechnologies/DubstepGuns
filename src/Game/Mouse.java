@@ -1,7 +1,7 @@
 package Game;
 
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+//import java.awt.GraphicsDevice;
+//import java.awt.GraphicsEnvironment;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;

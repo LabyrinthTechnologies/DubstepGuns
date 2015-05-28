@@ -1,6 +1,6 @@
 package Game;
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 
 public class Player 
 {

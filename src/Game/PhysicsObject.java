@@ -11,6 +11,9 @@ public class PhysicsObject
 	
 	public void Update()
 	{
-		
+		if(physics)
+		{
+			
+		}
 	}
 }
