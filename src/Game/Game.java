@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
@@ -14,6 +15,7 @@ import java.awt.Image;
 //import java.awt.geom.Ellipse2D;
 //import java.awt.image.BufferedImage;
 //import java.io.IOException;
+
 
 //import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -34,12 +36,18 @@ public class Game extends JPanel
 	public static MultiKeyPressListener multi =  new MultiKeyPressListener();
 	public static Mouse mouse = new Mouse();
 
+	@Override
+	public Dimension getPreferredSize()
+	{
+		return new Dimension (1000,700);
+	}
 	
 	public static void main(String[] args) throws InterruptedException 
 	{
-		
+		//frame.getp
 		frame.add(game);
-		frame.setSize(1000, 700);
+		//frame.setSize(1000, 700);
+		frame.pack();
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int desktopwidth = gd.getDisplayMode().getWidth();
 		int desktopheight = gd.getDisplayMode().getHeight();
@@ -83,7 +91,7 @@ public class Game extends JPanel
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.white);
-		g2d.fillRect(0,0,frame.getWidth(), frame.getHeight());
+		g2d.fillRect(0,0, 1000, 700);
 		g2d.setColor(Color.BLACK);
 		//g2d.drawString("Hi", 50, 50);
 		//ClassLoader cldr = this.getClass().getClassLoader();

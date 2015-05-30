@@ -31,7 +31,7 @@ class Mouse implements MouseListener
 	public boolean isOnscreen()
 	{
 		Point p = Game.frame.getLocation();
-		if (GetRawPosY() > p.getY() && GetRawPosY() < Game.frame.getHeight()+p.getY() && GetRawPosX() > p.getX() && GetRawPosX() < Game.frame.getWidth()+p.getX())
+		if (GetRawPosY() > p.getY() && GetRawPosY() < 700+p.getY() && GetRawPosX() > p.getX() && GetRawPosX() < 1000+p.getX())
 		{
 			return true;
 		}
