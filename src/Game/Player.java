@@ -15,7 +15,7 @@ public class Player
 	
 	public void moveRight()
 	{
-		if(this.xPos < Game.frame.getWidth()-120)
+		if(this.xPos < 1000)
 		{
 			this.xPos = this.xPos + 10;
 		}
@@ -39,7 +39,7 @@ public class Player
 	
 	public void moveDown()
 	{
-		if(this.yPos < Game.frame.getHeight()-130)
+		if(this.yPos < 700)
 		{
 			this.yPos = this.yPos + 10;
 		}
