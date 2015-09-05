@@ -30,7 +30,7 @@ class Mouse implements MouseListener
 	
 	public boolean isOnscreen()
 	{
-		Point p = Game.frame.getLocation();
+		Point p = Main.frame.getLocation();
 		if (GetRawPosY() > p.getY() && GetRawPosY() < 700+p.getY() && GetRawPosX() > p.getX() && GetRawPosX() < 1000+p.getX())
 		{
 			return true;
@@ -40,7 +40,7 @@ class Mouse implements MouseListener
 	
 	public float GetAdjustedX()
 	{
-		Point p = Game.frame.getLocation();
+		Point p = Main.frame.getLocation();
 		if(isOnscreen())
 		{
 			return (float) (GetRawPosX() - p.getX());
@@ -53,7 +53,7 @@ class Mouse implements MouseListener
 	
 	public float GetAdjustedY()
 	{
-		Point p = Game.frame.getLocation();
+		Point p = Main.frame.getLocation();
 		if(isOnscreen())
 		{
 			return (float) (GetRawPosY() - p.getY());

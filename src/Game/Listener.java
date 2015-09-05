@@ -66,7 +66,7 @@ public class Listener implements KeyListener, ActionListener
 			d = true;
 		}
 		
-		System.out.println("press "+arg0.getKeyChar());
+		//System.out.println("press "+arg0.getKeyChar());
 	}
 
 	@Override
