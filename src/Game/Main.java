@@ -41,7 +41,7 @@ public class Main
 			{
 				if(player.state == "standing")
 				{
-					player.setYVel(-20);
+					player.setYVel(-18);
 				}
 			}
 			if(listener.getA())

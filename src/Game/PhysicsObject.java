@@ -25,12 +25,12 @@ public class PhysicsObject
 			{
 				if(p.state == "falling")
 				{
-					p.addYVel(1);
+					p.addYVel(0.5F);
 				}
-				else
+				/*else
 				{
 					p.setYVel(0);
-				}
+				}*/
 			}
 			
 			
