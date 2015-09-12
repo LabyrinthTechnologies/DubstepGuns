@@ -4,12 +4,12 @@ import java.awt.Point;
 
 //import javax.swing.JFrame;
 
-public class Player 
+public class Entity 
 {
-	public Player()
+	public Entity()
 	{
-		collideDown = 700;
-		collideRight = 1000;
+		collideDown = Main.c.ySize;
+		collideRight = Main.c.xSize;
 		collideLeft = 0;
 		collideUp = 0;
 	}
@@ -18,8 +18,8 @@ public class Player
 	private int yPos = 0;
 	public float xVel = 0;
 	public float yVel = 0;
-	public int xSize = 50;
-	public int ySize = 50;
+	public int xSize = 15;
+	public int ySize = 25;
 	public int collideLeft;
 	public int collideRight;
 	public int collideUp;
@@ -69,36 +69,40 @@ public class Player
 	
 	private Point toblock(int x, int y)
 	{
-		return new Point(x / 50, (y / 50));
+		return new Point(x / Main.blockSize, (y / Main.blockSize));
 	}
 	
 	public void Update()
 	{
-		collideDown = 700;
-		collideRight = 1000;
+		collideDown = Main.level.level[0].length;
+		collideRight = Main.level.level.length * Main.blockSize;
 		collideLeft = 0;
 		collideUp = 0;
 		boolean out = true;
 		int counter = 1;
 		while (out)
 		{
-			if(!(xPos == (Main.level.level.length * 50) - 50))
+			if(!(xPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
 			{
 				//if(xPos)
-				if(xPos%50 != 0)
+				if(xPos%Main.blockSize != 0)
 				{
-					if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y + counter] == 1)
+					if(xPos + xSize > (toblock(xPos, yPos).x + 1) * Main.blockSize)
 					{
-						collideDown = ((toblock(xPos, yPos).y + counter) * 50);
-						//System.out.println("1: " + collideDown);
-						out = false;
+						if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y + counter] == 1)
+						{
+							collideDown = ((toblock(xPos, yPos).y + counter) * Main.blockSize);
+							//System.out.println("1: " + collideDown);
+							out = false;
+						}
 					}
 				}
+
 			}	
 			
 			if(Main.level.level[toblock(xPos, yPos).x][toblock(xPos, yPos).y + counter] == 1)
 			{
-				collideDown = ((toblock(xPos, yPos).y + counter) * 50);
+				collideDown = ((toblock(xPos, yPos).y + counter) * Main.blockSize);
 				//System.out.println("1: " + collideDown);
 				out = false;
 			}
@@ -108,88 +112,69 @@ public class Player
 		counter = 1;
 		while(out)
 		{
-			if(toblock(xPos, yPos).y - counter == 0)
+			if(toblock(xPos, yPos).y - counter < 0)
 			{
 				collideUp = 0;
 				break;
 			}
-			if(!(xPos == (Main.level.level.length * 50) - 50))
+			if(!(xPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
 			{
-				if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y - counter] == 1)
+				if(xPos%Main.blockSize != 0)
 				{
-					collideUp = ((toblock(xPos, yPos).y - counter) * 50);
-					//System.out.println("2: " + collideUp);
-					out = false;
+					if(xPos + xSize > (toblock(xPos, yPos).x + 1) * Main.blockSize)
+					{
+						if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y - counter] == 1)
+						{
+							collideUp = ((toblock(xPos, yPos).y - counter) * Main.blockSize) + Main.blockSize;
+							//System.out.println("2: " + collideUp);
+							out = false;
+						}
+					}
 				}
 			}	
 			
 			if(Main.level.level[toblock(xPos, yPos).x][toblock(xPos, yPos).y - counter] == 1)
 			{
-				collideUp = ((toblock(xPos, yPos).y - counter) * 50);
+				collideUp = ((toblock(xPos, yPos).y - counter) * Main.blockSize) + Main.blockSize;
 				//System.out.println("2: " + collideUp);
 				out = false;
 			}
 			counter++;
 		}
-		
+		//System.out.println(collideUp);
 		out = true;
 		counter = 0;
 		while (out)
 		{
-			if(toblock(xPos, yPos).x + counter == 20)
+			if(toblock(xPos, yPos).x + counter == Main.level.level.length)
 			{
-				collideRight = 1000;
+				collideRight =  Main.level.level.length * Main.blockSize;
 				break;
 			}
-			if(!(yPos == (Main.level.level[0].length * 50) - 50))
+			if(!(yPos == (Main.level.level[0].length * Main.blockSize) - Main.blockSize))
 			{
 				if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y + 1] == 1)
 				{
-					if(state != "standing")
+					if(yPos + ySize > (toblock(xPos, yPos).y + 1) * Main.blockSize)
 					{
-						collideRight = ((toblock(xPos, yPos).x + counter) * 50);
-						//System.out.println("1: " + collideDown);
-						out = false;
+						if(state != "standing")
+						{
+							collideRight = ((toblock(xPos, yPos).x + counter) * Main.blockSize);
+							//System.out.println("1: " + collideDown);
+							out = false;
+						}
 					}
 				}
 			}	
 			
 			if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y] == 1)
 			{
-				collideRight = ((toblock(xPos, yPos).x + counter) * 50);
+				collideRight = ((toblock(xPos, yPos).x + counter) * Main.blockSize);
 				//System.out.println("1: " + collideDown);
 				out = false;
 			}
 			counter++;
 		}
-		/*while(out)
-		{
-			if(toblock(xPos, yPos).x + counter == 20)
-			{
-				collideRight = 1000;
-				break;
-			}
-			if(!(yPos == (Main.level.level.length * 50) - 50))
-			{
-				if(state != "standing")
-				{
-					if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y + 1] == 1)
-					{
-						collideRight = (((toblock(xPos, yPos).x + counter) * 50));
-						//System.out.println("4: " + collideRight);
-						out = false;
-					}
-				}	
-			}	
-			
-			if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y] == 1)
-			{
-				collideRight = (((toblock(xPos, yPos).x + counter) * 50));
-				//System.out.println("4: " + collideRight);
-				out = false;
-			}
-			counter++;
-		}*/
 		
 		out = true;
 		counter = 0;
@@ -200,22 +185,25 @@ public class Player
 				collideLeft = 0;
 				break;
 			}
-			if(!(yPos == (Main.level.level.length * 50) - 50))
+			if(!(yPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
 			{
-				if(state != "standing")
+				if(yPos + ySize > (toblock(xPos, yPos).y + 1) * Main.blockSize)
 				{
-					if(Main.level.level[toblock(xPos, yPos).x - counter][toblock(xPos, yPos).y + 1] == 1)
+					if(state != "standing")
 					{
-						collideLeft = (((toblock(xPos, yPos).x - counter) * 50) + xSize);
-						//System.out.println("3: " + collideLeft);
-						out = false;
+						if(Main.level.level[toblock(xPos, yPos).x - counter][toblock(xPos, yPos).y + 1] == 1)
+						{
+							collideLeft = (((toblock(xPos, yPos).x - counter) * Main.blockSize) + Main.blockSize);
+							//System.out.println("3: " + collideLeft);
+							out = false;
+						}
 					}
 				}	
 			}	
 			
 			if(Main.level.level[toblock(xPos, yPos).x - counter][toblock(xPos, yPos).y] == 1)
 			{
-				collideLeft = (((toblock(xPos, yPos).x - counter) * 50) + xSize);
+				collideLeft = (((toblock(xPos, yPos).x - counter) * Main.blockSize) + Main.blockSize);
 				//System.out.println("3: " + collideLeft);
 				out = false;
 			}
@@ -242,10 +230,10 @@ public class Player
 				yVel = 0;
 				//state = "standing";
 			}
-			else if ((yPos < collideDown) && (yPos - (collideUp + 50) < -yVel))//((yVel < 0) && (-yVel > yPos))
+			else if ((yPos < collideDown) && (yPos - (collideUp) < -yVel))//((yVel < 0) && (-yVel > yPos))
 			{
 				//System.out.println("hit2");
-				yPos = collideUp + 50;
+				yPos = collideUp;
 				System.out.println("up");
 				yVel = 0;
 				//state = "standing";
@@ -258,21 +246,27 @@ public class Player
 				//state = "falling";
 			}
 			
+			if(yPos == collideUp)
+			{
+				yVel = 0;
+				yPos = yPos + 1;
+			}
+			
 		}
 		
 		if((xPos < collideRight - xSize && xVel > 0) || (xPos > collideLeft && xVel < 0))
 		{
 			System.out.println("collidex");
-			if((xPos > collideLeft) && (collideRight - (xPos + xSize) < xVel))
+			if((xPos < collideLeft) && (collideRight - (xPos + xSize) < xVel))
 			{
-				System.out.println("hit");
+				//System.out.println("hit " + xPos + " " + collideLeft + " " + collideRight);
 				xPos = collideRight - xSize;
 				xVel = 0;
 			}
 			else if ((xPos < collideRight) && (xPos - (collideLeft) < -xVel))
 			{
 				System.out.println("hit2");
-				xPos = collideLeft + 50;
+				xPos = collideLeft;
 				xVel = 0;
 			}
 			else
@@ -280,11 +274,13 @@ public class Player
 				System.out.println("norm");
 				xPos = (int) (xPos + xVel);
 			}
+			
+
 			//this.xPos = this.xPos + xVel;
 		}
 		
 
-		System.out.println(state + " " + collideDown + " " + yPos + " " + yVel + " " + xPos);
+		//System.out.println(state + " " + collideDown + " " + yPos + " " + yVel + " " + xPos);
 		
 		if(yPos == collideDown - ySize)
 		{
@@ -297,5 +293,6 @@ public class Player
 			state = "falling";
 		}
 		
+
 	}
 }

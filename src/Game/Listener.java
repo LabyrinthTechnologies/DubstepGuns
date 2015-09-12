@@ -22,6 +22,8 @@ public class Listener implements KeyListener, ActionListener
 	private boolean a = false;
 	private boolean s = false;
 	private boolean d = false;
+	private boolean left = false;
+	private boolean right = false;
 	
 	public boolean getW()
 	{
@@ -41,6 +43,16 @@ public class Listener implements KeyListener, ActionListener
 	public boolean getD()
 	{
 		return d;
+	}
+	
+	public boolean getLeft()
+	{
+		return left;
+	}
+	
+	public boolean getRight()
+	{
+		return right;
 	}
 	
 	@Override
@@ -64,6 +76,16 @@ public class Listener implements KeyListener, ActionListener
 		if(arg0.getKeyCode() == KeyEvent.VK_D)
 		{
 			d = true;
+		}
+		
+		if(arg0.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			right = true;
+		}
+		
+		if(arg0.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			left = true;
 		}
 		
 		//System.out.println("press "+arg0.getKeyChar());
@@ -90,6 +112,16 @@ public class Listener implements KeyListener, ActionListener
 		if(arg0.getKeyCode() == KeyEvent.VK_D)
 		{
 			d = false;
+		}
+		
+		if(arg0.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			right = false;
+		}
+		
+		if(arg0.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			left = false;
 		}
 	}
 

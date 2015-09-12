@@ -10,8 +10,10 @@ public class Main
 	public static String Version = "0.0.03";
 	public static JFrame frame = new JFrame("Dubstep Guns" + " " + Version);
 	public static Game game = new Game();
+	public static int blockSize = 50;
+	public static Camera c = new Camera();
 	
-	public static Player player = new Player();
+	public static Entity player = new Entity();
 	public static Listener listener = new Listener();
 	public static MultiKeyPressListener multi =  new MultiKeyPressListener();
 	public static Mouse mouse = new Mouse();
@@ -41,7 +43,7 @@ public class Main
 			{
 				if(player.state == "standing")
 				{
-					player.setYVel(-18);
+					player.setYVel(-17);
 				}
 			}
 			if(listener.getA())
@@ -60,6 +62,16 @@ public class Main
 			if(!listener.getA() && !listener.getD())
 			{
 				player.setXVel(0);
+			}
+			
+			if(listener.getRight())
+			{
+				c.cameraRight(2);
+			}
+			
+			if(listener.getLeft())
+			{
+				c.cameraLeft(2);
 			}
 			/*if(!listener.getW() && !listener.getS())
 			{

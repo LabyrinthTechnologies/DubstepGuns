@@ -4,9 +4,9 @@ public class PhysicsObject
 {
 	private static boolean physics = false;
 	
-	private static Player p;
+	private static Entity p;
 	
-	PhysicsObject(Player player)
+	PhysicsObject(Entity player)
 	{
 		p = player;
 	}

@@ -22,6 +22,14 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 
 
+
+
+
+
+
+
+
+
 //import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -83,13 +91,13 @@ public class Game extends JPanel
 				{
 					//btemp = tile1;
 					//g2d.setColor(Color.yellow);
-					g2d.drawImage(tile1, (x * 50), (y * 50), 50, 50, this);
+					g2d.drawImage(tile1, (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);
 					//System.out.println("yellow");
 				}
 				else
 				{
 					//btemp = tileblank;
-					g2d.drawImage(tileblank, (x * 50), (y * 50), 50, 50, this);
+					g2d.drawImage(tileblank, (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);
 					//g2d.setColor(Color.blue);
 				}
 				//g2d.fillRect(50 * x, 50 * y, 50 * (x + 1), 50 * (y + 1));
@@ -98,7 +106,7 @@ public class Game extends JPanel
 			}
 		}
 		//g2d.drawImage(tileset, 0, 0, 200, 200, this);
-		g2d.drawImage(player, Main.player.getPos().x, Main.player.getPos().y, Main.player.xSize, Main.player.ySize, this);
+		g2d.drawImage(player, Main.player.getPos().x - (int)Main.c.xPos, Main.player.getPos().y - (int)Main.c.yPos, Main.player.xSize, Main.player.ySize, this);
 		//g2d.draw(new Ellipse2D.Double(0, 100, 30, 30));
 	}
 	
