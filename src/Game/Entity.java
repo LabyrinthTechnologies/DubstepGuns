@@ -18,8 +18,8 @@ public class Entity
 	private int yPos = 0;
 	public float xVel = 0;
 	public float yVel = 0;
-	public int xSize = 15;
-	public int ySize = 25;
+	public int xSize = 30;
+	public int ySize = 50;
 	public int collideLeft;
 	public int collideRight;
 	public int collideUp;
@@ -73,226 +73,185 @@ public class Entity
 	}
 	
 	public void Update()
-	{
-		collideDown = Main.level.level[0].length;
-		collideRight = Main.level.level.length * Main.blockSize;
-		collideLeft = 0;
-		collideUp = 0;
-		boolean out = true;
-		int counter = 1;
-		while (out)
+	{		
+		if(xPos%Main.blockSize == 0)
 		{
-			if(!(xPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
+			if(Main.level.level[xPos / Main.blockSize][(yPos / Main.blockSize) + 1] == 1 && yVel > 0)
 			{
-				//if(xPos)
-				if(xPos%Main.blockSize != 0)
-				{
-					if(xPos + xSize > (toblock(xPos, yPos).x + 1) * Main.blockSize)
-					{
-						if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y + counter] == 1)
-						{
-							collideDown = ((toblock(xPos, yPos).y + counter) * Main.blockSize);
-							//System.out.println("1: " + collideDown);
-							out = false;
-						}
-					}
-				}
-
-			}	
-			
-			if(Main.level.level[toblock(xPos, yPos).x][toblock(xPos, yPos).y + counter] == 1)
-			{
-				collideDown = ((toblock(xPos, yPos).y + counter) * Main.blockSize);
-				//System.out.println("1: " + collideDown);
-				out = false;
-			}
-			counter++;
-		}	
-		out = true;
-		counter = 1;
-		while(out)
-		{
-			if(toblock(xPos, yPos).y - counter < 0)
-			{
-				collideUp = 0;
-				break;
-			}
-			if(!(xPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
-			{
-				if(xPos%Main.blockSize != 0)
-				{
-					if(xPos + xSize > (toblock(xPos, yPos).x + 1) * Main.blockSize)
-					{
-						if(Main.level.level[toblock(xPos, yPos).x + 1][toblock(xPos, yPos).y - counter] == 1)
-						{
-							collideUp = ((toblock(xPos, yPos).y - counter) * Main.blockSize) + Main.blockSize;
-							//System.out.println("2: " + collideUp);
-							out = false;
-						}
-					}
-				}
-			}	
-			
-			if(Main.level.level[toblock(xPos, yPos).x][toblock(xPos, yPos).y - counter] == 1)
-			{
-				collideUp = ((toblock(xPos, yPos).y - counter) * Main.blockSize) + Main.blockSize;
-				//System.out.println("2: " + collideUp);
-				out = false;
-			}
-			counter++;
-		}
-		//System.out.println(collideUp);
-		out = true;
-		counter = 0;
-		while (out)
-		{
-			if(toblock(xPos, yPos).x + counter == Main.level.level.length)
-			{
-				collideRight =  Main.level.level.length * Main.blockSize;
-				break;
-			}
-			if(!(yPos == (Main.level.level[0].length * Main.blockSize) - Main.blockSize))
-			{
-				if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y + 1] == 1)
-				{
-					if(yPos + ySize > (toblock(xPos, yPos).y + 1) * Main.blockSize)
-					{
-						if(state != "standing")
-						{
-							collideRight = ((toblock(xPos, yPos).x + counter) * Main.blockSize);
-							//System.out.println("1: " + collideDown);
-							out = false;
-						}
-					}
-				}
-			}	
-			
-			if(Main.level.level[toblock(xPos, yPos).x + counter][toblock(xPos, yPos).y] == 1)
-			{
-				collideRight = ((toblock(xPos, yPos).x + counter) * Main.blockSize);
-				//System.out.println("1: " + collideDown);
-				out = false;
-			}
-			counter++;
-		}
-		
-		out = true;
-		counter = 0;
-		while(out)
-		{
-			if(toblock(xPos, yPos).x - counter == 0)
-			{
-				collideLeft = 0;
-				break;
-			}
-			if(!(yPos == (Main.level.level.length * Main.blockSize) - Main.blockSize))
-			{
-				if(yPos + ySize > (toblock(xPos, yPos).y + 1) * Main.blockSize)
-				{
-					if(state != "standing")
-					{
-						if(Main.level.level[toblock(xPos, yPos).x - counter][toblock(xPos, yPos).y + 1] == 1)
-						{
-							collideLeft = (((toblock(xPos, yPos).x - counter) * Main.blockSize) + Main.blockSize);
-							//System.out.println("3: " + collideLeft);
-							out = false;
-						}
-					}
-				}	
-			}	
-			
-			if(Main.level.level[toblock(xPos, yPos).x - counter][toblock(xPos, yPos).y] == 1)
-			{
-				collideLeft = (((toblock(xPos, yPos).x - counter) * Main.blockSize) + Main.blockSize);
-				//System.out.println("3: " + collideLeft);
-				out = false;
-			}
-			counter++;
-		}
-		
-
-		/*if(Main.level.level[toblock(xPos, yPos).x][toblock(xPos, yPos + 1).y] == 1)
-		{
-			collideDown = ((toblock(xPos, yPos).y + 1) * 50);
-			System.out.println("2: " + collideDown);
-		}*/
-		
-
-		
-		if((yPos < collideDown - ySize && yVel > 0) || (yPos > collideUp && yVel < 0))
-		{
-			System.out.println("collidey");
-			if((yPos > collideUp) && (collideDown - (yPos + ySize) < yVel))
-			{
-				//System.out.println("hit");
-				yPos = collideDown - ySize;
-				System.out.println("down");
+				state = "standing";
 				yVel = 0;
-				//state = "standing";
-			}
-			else if ((yPos < collideDown) && (yPos - (collideUp) < -yVel))//((yVel < 0) && (-yVel > yPos))
-			{
-				//System.out.println("hit2");
-				yPos = collideUp;
-				System.out.println("up");
-				yVel = 0;
-				//state = "standing";
 			}
 			else
 			{
-				//System.out.println("no hit");
-				yPos = (int) (yPos + yVel);
-				System.out.println("ynorm");
-				//state = "falling";
+				state = "falling";
 			}
-			
-			if(yPos == collideUp)
-			{
-				yVel = 0;
-				yPos = yPos + 1;
-			}
-			
-		}
-		
-		if((xPos < collideRight - xSize && xVel > 0) || (xPos > collideLeft && xVel < 0))
-		{
-			System.out.println("collidex");
-			if((xPos < collideLeft) && (collideRight - (xPos + xSize) < xVel))
-			{
-				//System.out.println("hit " + xPos + " " + collideLeft + " " + collideRight);
-				xPos = collideRight - xSize;
-				xVel = 0;
-			}
-			else if ((xPos < collideRight) && (xPos - (collideLeft) < -xVel))
-			{
-				System.out.println("hit2");
-				xPos = collideLeft;
-				xVel = 0;
-			}
-			else
-			{
-				System.out.println("norm");
-				xPos = (int) (xPos + xVel);
-			}
-			
-
-			//this.xPos = this.xPos + xVel;
-		}
-		
-
-		//System.out.println(state + " " + collideDown + " " + yPos + " " + yVel + " " + xPos);
-		
-		if(yPos == collideDown - ySize)
-		{
-			state = "standing";
-			//System.out.println("stand");
-			yVel = 0;
 		}
 		else
 		{
-			state = "falling";
+			if((Main.level.level[xPos / Main.blockSize][(yPos / Main.blockSize) + 1] == 1 || Main.level.level[(xPos + xSize) / Main.blockSize][(yPos / Main.blockSize) + 1] == 1) && yVel > 0)
+			{
+				state = "standing";
+				yVel = 0;
+			}
+			else
+			{
+				state = "falling";
+			}
+		}
+
+		if (/*yVel == 0 &&*/ xVel > 0)
+		{
+			System.out.println("pos non" + " (" + xPos + " " + yPos + ") (" + xVel + " " + yVel + ")");
+			//yPos = yPos + (int)yVel;
+			int tempx = xPos + xSize + (int)xVel;
+			int tempy = yPos;
+			if(Main.level.level.length > (tempx / Main.blockSize))
+			{
+				if(yPos%Main.blockSize == 0)
+				{
+					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
+					{
+						System.out.println("yesx");
+						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - xSize;
+						xVel = 0;
+					}
+					else
+					{
+						xPos = xPos + (int)xVel;
+					}
+				}
+				else
+				{
+					if(Main.level.level[(tempx / Main.blockSize)][(yPos / Main.blockSize)] == 1 || Main.level.level[(tempx / Main.blockSize)][((yPos + ySize) / Main.blockSize)] == 1)
+					{
+						System.out.println("hitx");
+						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - xSize;
+					}
+					else
+					{
+						xPos = xPos + (int)xVel;
+					}
+				}
+			}
+			else
+			{
+				xPos = (Main.level.level.length * Main.blockSize) - xSize;
+				xVel = 0;
+			}
+		}
+		else if (/*yVel == 0 &&0*/ xVel < 0)
+		{
+			System.out.println("neg non" + " " + xVel + " " + yVel);
+			//yPos = yPos + (int)yVel;
+			int tempx = xPos + (int)xVel;
+			int tempy = yPos;
+			if(0 < (tempx / Main.blockSize) + 1)
+			{
+				if(yPos%Main.blockSize == 0)
+				{
+					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
+					{
+						System.out.println("yesx");
+						xPos = ((xPos / Main.blockSize)) * Main.blockSize;
+						xVel = 0;
+					}
+					else
+					{
+						xPos = xPos + (int)xVel;
+					}
+				}
+				else
+				{
+					if(Main.level.level[(tempx / Main.blockSize)][(yPos / Main.blockSize)] == 1 || Main.level.level[(tempx / Main.blockSize)][(yPos + ySize) / Main.blockSize] == 1)
+					{
+						System.out.println("hitx");
+						xPos = ((xPos / Main.blockSize)) * Main.blockSize;
+						xVel = 0;
+					}
+					else
+					{
+						xPos = xPos + (int)xVel;
+					}
+				}
+			}
 		}
 		
-
+		if (yVel > 0 /*&& xVel == 0*/)
+		{
+			System.out.println("non pos" + " " + xVel + " " + yVel);
+			//yPos = yPos + (int)yVel;
+			int tempx = xPos;
+			int tempy = yPos + ySize + (int)yVel;
+			if(Main.level.level[0].length > (tempy / Main.blockSize))
+			{
+				if(xPos%Main.blockSize == 0)
+				{
+					if(Main.level.level[xPos / Main.blockSize][(tempy / Main.blockSize)] == 1)
+					{
+						System.out.println("yes");
+						yPos = ((yPos / Main.blockSize) + 1) * Main.blockSize;
+						yVel = 0;
+					}
+					else
+					{
+						state = "falling";
+						yPos = yPos + (int)yVel;
+					}
+				}
+				else
+				{
+					if(Main.level.level[xPos / Main.blockSize][(tempy / Main.blockSize)] == 1 || Main.level.level[(xPos + xSize) / Main.blockSize][(tempy / Main.blockSize)] == 1)
+					{
+						System.out.println("hit");
+						yPos = ((yPos / Main.blockSize) + 1) * Main.blockSize;
+						state = "standing";
+						yVel = 0;
+					}
+					else
+					{
+						state = "falling";
+						yPos = yPos + (int)yVel;
+					}
+				}
+			}
+		}
+		else if (yVel < 0 /*&& xVel == 0*/)
+		{
+			System.out.println("non neg" + " " + xVel + " " + yVel);
+			//yPos = yPos + (int)yVel;
+			int tempx = xPos;
+			int tempy = yPos + (int)yVel;
+			if(0 < (tempy / Main.blockSize) + 1)
+			{
+				if(xPos%Main.blockSize == 0)
+				{
+					if(Main.level.level[(xPos / Main.blockSize)][tempy / Main.blockSize] == 1)
+					{
+						System.out.println("yes");
+						yPos = ((yPos / Main.blockSize)) * Main.blockSize;
+						yVel = 0;
+					}
+					else
+					{
+						state = "falling";
+						yPos = yPos + (int)yVel;
+					}
+				}
+				else
+				{
+					if(Main.level.level[(xPos / Main.blockSize)][(tempy / Main.blockSize)] == 1 || Main.level.level[((xPos + xSize) / Main.blockSize)][(tempy / Main.blockSize)] == 1)
+					{
+						System.out.println("hit");
+						yPos = ((yPos / Main.blockSize)) * Main.blockSize;
+						yVel = 0;
+					}
+					else
+					{
+						state = "falling";
+						yPos = yPos + (int)yVel;
+					}
+				}
+			}
+		}
 	}
 }

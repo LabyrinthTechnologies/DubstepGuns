@@ -18,7 +18,6 @@ public class PhysicsObject
 	
 	public void Update()
 	{
-		p.Update();
 		if(physics)
 		{
 			if(p.getYVel() < 20)
@@ -35,5 +34,6 @@ public class PhysicsObject
 			
 			
 		}
+		p.Update();
 	}
 }

@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class Main 
 {
-	public static String Version = "0.0.03";
+	public static String Version = "0.0.04";
 	public static JFrame frame = new JFrame("Dubstep Guns" + " " + Version);
 	public static Game game = new Game();
 	public static int blockSize = 50;
@@ -48,7 +48,7 @@ public class Main
 			}
 			if(listener.getA())
 			{
-				player.setXVel(-5);
+				player.setXVel(-3);
 			}
 			/*if(listener.getS())
 			{
@@ -56,7 +56,7 @@ public class Main
 			}*/
 			if(listener.getD())
 			{
-				player.setXVel(5);
+				player.setXVel(3);
 			}
 			
 			if(!listener.getA() && !listener.getD())
