@@ -125,7 +125,7 @@ public class Entity
 					if(Main.level.level[(tempx / Main.blockSize)][(yPos / Main.blockSize)] == 1 || Main.level.level[(tempx / Main.blockSize)][((yPos + ySize) / Main.blockSize)] == 1)
 					{
 						System.out.println("hitx");
-						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - xSize;
+						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - (xSize + 1);
 					}
 					else
 					{
