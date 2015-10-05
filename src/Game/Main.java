@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class Main 
 {
-	public static String Version = "0.0.04";
+	public static String Version = "0.0.05";
 	public static JFrame frame = new JFrame("Dubstep Guns" + " " + Version);
 	public static Game game = new Game();
 	public static int blockSize = 50;
@@ -33,7 +33,7 @@ public class Main
 		frame.addKeyListener(listener);
 		frame.addMouseListener(mouse);
 		//frame.addKeyListener(multi);
-		player.setPos(80, 70);
+		player.setPos(800, 400);
 		physPlayer.setPhysics(true);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
