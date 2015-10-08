@@ -2,28 +2,24 @@ package Game;
 
 import java.awt.Point;
 
+import com.sun.prism.Image;
+
 //import javax.swing.JFrame;
 
 public class Entity 
 {
-	public Entity()
+	public Entity(Image t)
 	{
-		collideDown = Main.c.ySize;
-		collideRight = Main.c.xSize;
-		collideLeft = 0;
-		collideUp = 0;
+		texture = t;
 	}
 	
+	public Image texture;
 	private int xPos = 0;
 	private int yPos = 0;
 	public float xVel = 0;
 	public float yVel = 0;
 	public int xSize = 30;
 	public int ySize = 50;
-	public int collideLeft;
-	public int collideRight;
-	public int collideUp;
-	public int collideDown;
 	public String state = "falling";
 		
 	public void addYVel(float vel)
@@ -92,7 +88,7 @@ public class Entity
 			{
 				if((Main.level.level[xPos / Main.blockSize][(yPos / Main.blockSize) + 1] == 1 || Main.level.level[(xPos + xSize) / Main.blockSize][(yPos / Main.blockSize) + 1] == 1) && yVel > 0)
 				{
-					//System.out.println("stand");
+					////system.out.println("stand");
 					state = "standing";
 					yVel = 0;
 				}
@@ -105,7 +101,7 @@ public class Entity
 
 		if (/*yVel == 0 &&*/ xVel > 0)
 		{
-			System.out.println("pos non" + " (" + xPos + " " + yPos + ") (" + xVel + " " + yVel + ")");
+			//system.out.println("pos non" + " (" + xPos + " " + yPos + ") (" + xVel + " " + yVel + ")");
 			//yPos = yPos + (int)yVel;
 			int tempx = xPos + xSize + (int)xVel;
 			int tempy = yPos;
@@ -115,7 +111,7 @@ public class Entity
 				{
 					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
 					{
-						System.out.println("yesx");
+						//system.out.println("yesx");
 						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - xSize;
 						xVel = 0;
 					}
@@ -128,7 +124,7 @@ public class Entity
 				{
 					if(Main.level.level[(tempx / Main.blockSize)][(yPos / Main.blockSize)] == 1 || Main.level.level[(tempx / Main.blockSize)][((yPos + ySize) / Main.blockSize)] == 1)
 					{
-						System.out.println("hitx");
+						//system.out.println("hitx");
 						xPos = ((xPos / Main.blockSize) + 1) * Main.blockSize - (xSize);
 					}
 					else
@@ -145,7 +141,7 @@ public class Entity
 		}
 		else if (/*yVel == 0 &&0*/ xVel < 0)
 		{
-			System.out.println("neg non" + " " + xVel + " " + yVel);
+			//system.out.println("neg non" + " " + xVel + " " + yVel);
 			//yPos = yPos + (int)yVel;
 			int tempx = xPos + (int)xVel;
 			int tempy = yPos;
@@ -155,7 +151,7 @@ public class Entity
 				{
 					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
 					{
-						System.out.println("yesx");
+						//system.out.println("yesx");
 						xPos = ((xPos / Main.blockSize)) * Main.blockSize;
 						xVel = 0;
 					}
@@ -168,7 +164,7 @@ public class Entity
 				{
 					if(Main.level.level[(tempx / Main.blockSize)][(yPos / Main.blockSize)] == 1 || Main.level.level[(tempx / Main.blockSize)][(yPos + ySize) / Main.blockSize] == 1)
 					{
-						System.out.println("hitx");
+						//system.out.println("hitx");
 						xPos = ((xPos / Main.blockSize)) * Main.blockSize;
 						xVel = 0;
 					}
@@ -186,18 +182,18 @@ public class Entity
 		
 		if (yVel > 0 /*&& xVel == 0*/)
 		{
-			System.out.println("non pos" + " " + xVel + " " + yVel);
+			//system.out.println("non pos" + " " + xVel + " " + yVel);
 			//yPos = yPos + (int)yVel;
 			int tempx = xPos;
 			int tempy = yPos + (int)yVel;
 			if(Main.level.level[0].length * Main.blockSize > tempy)
 			{
-				System.out.println("left");
+				//system.out.println("left");
 				if(xPos%Main.blockSize == 0)
 				{
 					if(Main.level.level[xPos / Main.blockSize][((tempy + ySize) / Main.blockSize)] == 1)
 					{
-						System.out.println("yes");
+						//system.out.println("yes");
 						yPos = (((yPos) / Main.blockSize) + 1) * Main.blockSize;
 						yVel = 0;
 					}
@@ -209,10 +205,10 @@ public class Entity
 				}
 				else if((xPos+xSize)%Main.blockSize == 0)
 				{
-					System.out.println("right");
+					//system.out.println("right");
 					if(Main.level.level[xPos / Main.blockSize][((tempy + ySize) / Main.blockSize)] == 1)
 					{
-						System.out.println("yes2");
+						//system.out.println("yes2");
 						yPos = (((yPos) / Main.blockSize) + 1) * Main.blockSize;
 						yVel = 0;
 					}
@@ -224,14 +220,14 @@ public class Entity
 				}
 				else
 				{
-					System.out.println("norm");
+					//system.out.println("norm");
 					if(xPos + xSize < Main.level.level.length * Main.blockSize)
 					{
 						if(Main.level.level[xPos / Main.blockSize][((tempy + ySize) / Main.blockSize)] == 1 || Main.level.level[(xPos + xSize) / Main.blockSize][((tempy + ySize) / Main.blockSize)] == 1)
 						{	
-							System.out.println("hit+ " + xPos + " " + tempy);
+							//system.out.println("hit+ " + xPos + " " + tempy);
 							yPos = (((yPos) / Main.blockSize) + 1) * Main.blockSize;
-							System.out.println(xPos + " " + (yPos));
+							//system.out.println(xPos + " " + (yPos));
 							state = "standing";
 							;
 						}
@@ -250,7 +246,7 @@ public class Entity
 		}
 		else if (yVel < 0 /*&& xVel == 0*/)
 		{
-			System.out.println("non neg" + " " + xVel + " " + yVel);
+			//system.out.println("non neg" + " " + xVel + " " + yVel);
 			//yPos = yPos + (int)yVel;
 			int tempx = xPos;
 			int tempy = yPos + (int)yVel;
@@ -260,7 +256,7 @@ public class Entity
 				{
 					if(Main.level.level[(xPos / Main.blockSize)][tempy / Main.blockSize] == 1)
 					{
-						System.out.println("yes");
+						//system.out.println("yes");
 						yPos = ((yPos / Main.blockSize)) * Main.blockSize;
 						yVel = 0;
 					}
@@ -277,7 +273,7 @@ public class Entity
 						if(Main.level.level[(xPos / Main.blockSize)][(tempy / Main.blockSize)] == 1 || 
 							Main.level.level[((xPos + xSize) / Main.blockSize)][(tempy / Main.blockSize)] == 1)
 						{
-							System.out.println("hi-t");
+							//system.out.println("hi-t");
 							yPos = ((yPos / Main.blockSize)) * Main.blockSize;
 							yVel = 0;
 						}

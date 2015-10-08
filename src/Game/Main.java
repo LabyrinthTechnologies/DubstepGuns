@@ -12,48 +12,51 @@ public class Main
 	public static Game game = new Game();
 	public static int blockSize = 50;
 	public static Camera c = new Camera();
+	public static TextureLoader tl = new TextureLoader();
+	public static Tileset ts;
 	
-	public static Entity player = new Entity();
+	public static Entity player = new Entity(null);
 	public static Listener listener = new Listener();
 	public static MultiKeyPressListener multi =  new MultiKeyPressListener();
 	public static Mouse mouse = new Mouse();
 	public static Level level = new Level();
 	public static PhysicsObject physPlayer = new PhysicsObject(player);
-
-	public static void main(String[] args) throws InterruptedException 
+	
+	public static void setupGraphics()
 	{
-		//frame.getp
 		frame.add(game);
-		//frame.setSize(1000, 700);
 		frame.pack();
 		GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
 		int desktopwidth = gd.getDisplayMode().getWidth();
 		int desktopheight = gd.getDisplayMode().getHeight();
 		frame.setLocation((desktopwidth/2)-500, (desktopheight/2)-350);
-		frame.addKeyListener(listener);
-		frame.addMouseListener(mouse);
-		//frame.addKeyListener(multi);
-		player.setPos(800, 400);
-		physPlayer.setPhysics(true);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public static void main(String[] args) throws InterruptedException 
+	{
+		ts = new Tileset(level.tileSrc);
+		setupGraphics();
+		frame.addKeyListener(listener);
+		frame.addMouseListener(mouse);
+		player.setPos(800, 400);
+		physPlayer.setPhysics(true);
+		
 		while (true)
 		{
 			if(listener.getW())
 			{
 				if(player.state == "standing")
 				{
-					player.setYVel(-17);
+					player.setYVel(-14);
 				}
 			}
 			if(listener.getA())
 			{
 				player.setXVel(-3);
 			}
-			/*if(listener.getS())
-			{
-				player.setYVel(10);
-			}*/
+			
 			if(listener.getD())
 			{
 				player.setXVel(3);

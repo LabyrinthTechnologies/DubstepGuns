@@ -7,15 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-//import java.awt.MouseInfo;
-//ort java.awt.Point;
-//import java.awt.PointerInfo;
-//import java.awt.TextArea;
-//import java.awt.Toolkit;
-//import java.awt.geom.Ellipse2D;
-//import java.awt.image.BufferedImage;
-//import java.io.IOException;
-
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -23,18 +14,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 
-
-
-
-
-
-
-
-
-
-
-
-//import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -80,7 +59,7 @@ public class Game extends JPanel
 	{
 		super();
 		player = new ImageIcon(this.getClass().getResource("/Textures/Thing.png")).getImage();
-		tileset = new ImageIcon(this.getClass().getResource("/Textures/tiles.png")).getImage();
+		/*tileset = new ImageIcon(this.getClass().getResource("/Textures/tiles.png")).getImage();
 		tileblank = createImage(new FilteredImageSource(tileset.getSource(),
 		        new CropImageFilter(0, 0, 16, 16)));
 		tile1 = createImage(new FilteredImageSource(tileset.getSource(),
@@ -183,7 +162,7 @@ public class Game extends JPanel
 		tile9_2 = op.filter(ToBuffImage(tile9), null);
 		tx = AffineTransform.getRotateInstance(Math.toRadians (270), locationX, locationY);
 		op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-		tile9_3 = op.filter(ToBuffImage(tile9), null);
+		tile9_3 = op.filter(ToBuffImage(tile9), null);*/
 	}
 	
 	public BufferedImage rotate180( BufferedImage inputImage ) 
@@ -242,7 +221,8 @@ public class Game extends JPanel
 		{
 			for (int y = 0; y < Main.level.renderLevel[0].length; y++)
 			{
-				if(Main.level.renderLevel[x][y] == 1)
+				g2d.drawImage(Main.ts.tiles[Main.level.renderLevel[x][y]], (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);
+				/*if(Main.level.renderLevel[x][y] == 1)
 				{
 					//btemp = tile1;
 					//g2d.setColor(Color.yellow);
@@ -354,7 +334,7 @@ public class Game extends JPanel
 					//btemp = tileblank;
 					g2d.drawImage(tileblank, (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);
 					//g2d.setColor(Color.blue);
-				}
+				}*/
 				//g2d.fillRect(50 * x, 50 * y, 50 * (x + 1), 50 * (y + 1));
 				//g2d.drawImage(btemp, (x * 50), (y * 50), 50, 50, this);
 				
