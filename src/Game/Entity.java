@@ -1,16 +1,15 @@
 package Game;
 
+import java.awt.Image;
 import java.awt.Point;
-
-import com.sun.prism.Image;
 
 //import javax.swing.JFrame;
 
 public class Entity 
 {
-	public Entity(Image t)
+	public Entity()
 	{
-		texture = t;
+		
 	}
 	
 	public Image texture;

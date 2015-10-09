@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 
 public class TextureLoader 
 {
+	public final int Player = 0;
+	
 	private ArrayList<String> textureSrc;
 	public Image[] textures;
 	

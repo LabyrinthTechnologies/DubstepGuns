@@ -9,13 +9,13 @@ public class Main
 {
 	public static String Version = "0.0.05";
 	public static JFrame frame = new JFrame("Dubstep Guns" + " " + Version);
-	public static Game game = new Game();
+	public static Game game;
 	public static int blockSize = 50;
 	public static Camera c = new Camera();
 	public static TextureLoader tl = new TextureLoader();
 	public static Tileset ts;
 	
-	public static Entity player = new Entity(null);
+	public static Player player = new Player();
 	public static Listener listener = new Listener();
 	public static MultiKeyPressListener multi =  new MultiKeyPressListener();
 	public static Mouse mouse = new Mouse();
@@ -33,10 +33,24 @@ public class Main
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	public static void loadTextures()
+	{
+		tl.addTexture("/Textures/Thing.png");
+		tl.loadTextures();
+	}
+	
+	public static void assignTextures()
+	{
+		player.texture = tl.textures[0];
+	}
 
 	public static void main(String[] args) throws InterruptedException 
 	{
 		ts = new Tileset(level.tileSrc);
+		loadTextures();
+		assignTextures();
+		game = new Game();
 		setupGraphics();
 		frame.addKeyListener(listener);
 		frame.addMouseListener(mouse);
@@ -44,29 +58,7 @@ public class Main
 		physPlayer.setPhysics(true);
 		
 		while (true)
-		{
-			if(listener.getW())
-			{
-				if(player.state == "standing")
-				{
-					player.setYVel(-14);
-				}
-			}
-			if(listener.getA())
-			{
-				player.setXVel(-3);
-			}
-			
-			if(listener.getD())
-			{
-				player.setXVel(3);
-			}
-			
-			if(!listener.getA() && !listener.getD())
-			{
-				player.setXVel(0);
-			}
-			
+		{	
 			if(listener.getRight())
 			{
 				c.cameraRight(2);
@@ -76,10 +68,7 @@ public class Main
 			{
 				c.cameraLeft(2);
 			}
-			/*if(!listener.getW() && !listener.getS())
-			{
-				player.setYVel(0);
-			}*/
+
 			//System.out.println(mouse.isOnscreen() + " " + mouse.GetAdjustedX() + " " + mouse.GetAdjustedY()+ " " + mouse.isClicked);
 			
 			physPlayer.Update();
