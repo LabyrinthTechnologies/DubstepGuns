@@ -36,20 +36,20 @@ public class Main
 	
 	public static void loadTextures()
 	{
-		tl.addTexture("/Textures/Thing.png");
+		tl.addTexture("/Textures/Thing.png", "defaultPlayer");
 		tl.loadTextures();
 	}
 	
-	public static void assignTextures()
+	/*public static void assignTextures()
 	{
 		player.texture = tl.textures[0];
-	}
+	}*/
 
 	public static void main(String[] args) throws InterruptedException 
 	{
 		ts = new Tileset(level.tileSrc);
 		loadTextures();
-		assignTextures();
+		//assignTextures();
 		game = new Game();
 		setupGraphics();
 		frame.addKeyListener(listener);

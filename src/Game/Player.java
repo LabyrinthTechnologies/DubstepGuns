@@ -5,6 +5,7 @@ public class Player extends Entity
 	@Override
 	public void Update()
 	{
+		textureName = "defaultPlayer";
 		super.Update();
 		
 		if(Main.listener.getW())

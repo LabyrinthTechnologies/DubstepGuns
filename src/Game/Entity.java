@@ -12,7 +12,7 @@ public class Entity
 		
 	}
 	
-	public Image texture;
+	public String textureName = "default";
 	private int xPos = 0;
 	private int yPos = 0;
 	public float xVel = 0;
@@ -106,7 +106,7 @@ public class Entity
 			int tempy = yPos;
 			if(Main.level.level.length * Main.blockSize > tempx)
 			{
-				if(yPos%Main.blockSize == 0)
+				if(yPos%Main.blockSize == 0 || (yPos+ySize)%Main.blockSize == 0)
 				{
 					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
 					{
@@ -146,7 +146,7 @@ public class Entity
 			int tempy = yPos;
 			if(0 < tempx)
 			{
-				if(yPos%Main.blockSize == 0)
+				if(yPos%Main.blockSize == 0 || (yPos+ySize)%Main.blockSize == 0)
 				{
 					if(Main.level.level[tempx / Main.blockSize][yPos / Main.blockSize] == 1)
 					{

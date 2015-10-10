@@ -29,7 +29,7 @@ public class Game extends JPanel
 	public Game()
 	{
 		super();
-		player = Main.tl.textures[0];//new ImageIcon(this.getClass().getResource("/Textures/Thing.png")).getImage();
+		//player = Main.tl.textures[0];//new ImageIcon(this.getClass().getResource("/Textures/Thing.png")).getImage();
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class Game extends JPanel
 				g2d.drawImage(Main.ts.tiles[Main.level.renderLevel[x][y]], (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);	
 			}
 		}
-		g2d.drawImage(Main.tl.textures[Main.tl.Player], Main.player.getPos().x - (int)Main.c.xPos, Main.player.getPos().y - (int)Main.c.yPos, Main.player.xSize, Main.player.ySize, this);
+		g2d.drawImage(Main.tl.textureFromString(Main.player.textureName), Main.player.getPos().x - (int)Main.c.xPos, Main.player.getPos().y - (int)Main.c.yPos, Main.player.xSize, Main.player.ySize, this);
 	}
 	
 }
