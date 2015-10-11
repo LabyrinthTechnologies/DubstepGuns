@@ -3,6 +3,10 @@ package Game;
 public class Level 
 {
 	public String tileSrc = "/Textures/tiles2.png";
+	public String musicSrc = "/music/Digital_Math_-_Hop_Up.wav";
+	public String musicName = "Digital Math - Hop Up";
+	public int musicBPM = 110;
+	public int musicLength = 233;
 	
 	public int[][] level = {
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,1},

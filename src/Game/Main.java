@@ -2,7 +2,11 @@ package Game;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
 public class Main 
@@ -13,14 +17,17 @@ public class Main
 	public static int blockSize = 50;
 	public static Camera c = new Camera();
 	public static TextureLoader tl = new TextureLoader();
+	public static MusicLoader ml = new MusicLoader();
+	public static MusicPlayer mp = new MusicPlayer();
 	public static Tileset ts;
+	public static ArrayList<Entity> entity = new ArrayList<Entity>();
 	
-	public static Player player = new Player();
+	//public static Player player = new Player();
 	public static Listener listener = new Listener();
 	public static MultiKeyPressListener multi =  new MultiKeyPressListener();
 	public static Mouse mouse = new Mouse();
 	public static Level level = new Level();
-	public static PhysicsObject physPlayer = new PhysicsObject(player);
+	//public static PhysicsObject physPlayer;
 	
 	public static void setupGraphics()
 	{
@@ -36,8 +43,15 @@ public class Main
 	
 	public static void loadTextures()
 	{
-		tl.addTexture("/Textures/Thing.png", "defaultPlayer");
+		tl.addMap("/Textures/Thing.png", "defaultPlayer");
+		tl.addMap("/Textures/rhythmGun.png", "rhythmGun");
 		tl.loadTextures();
+	}
+	
+	public static void loadMusic() throws UnsupportedAudioFileException, IOException
+	{
+		ml.addMap(level.musicSrc, level.musicName);
+		ml.loadMusic();
 	}
 	
 	/*public static void assignTextures()
@@ -45,17 +59,23 @@ public class Main
 		player.texture = tl.textures[0];
 	}*/
 
-	public static void main(String[] args) throws InterruptedException 
+	public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{
 		ts = new Tileset(level.tileSrc);
 		loadTextures();
+		loadMusic();
 		//assignTextures();
 		game = new Game();
 		setupGraphics();
 		frame.addKeyListener(listener);
 		frame.addMouseListener(mouse);
-		player.setPos(800, 400);
-		physPlayer.setPhysics(true);
+		entity.add(new Player());
+		entity.add(new RhythmGun());
+		entity.get(0).setPos(800, 400);
+		entity.get(1).setPos(100, 100);
+		//physPlayer = new PhysicsObject(entity.get(0));
+		//physPlayer.setPhysics(true);
+		mp.playMusic(level.musicName);
 		
 		while (true)
 		{	
@@ -71,7 +91,12 @@ public class Main
 
 			//System.out.println(mouse.isOnscreen() + " " + mouse.GetAdjustedX() + " " + mouse.GetAdjustedY()+ " " + mouse.isClicked);
 			
-			physPlayer.Update();
+			//physPlayer.Update();
+			//physPlayer.Update();
+			for (Entity e : entity)
+			{
+				e.Update();
+			}
 			
 			game.repaint();
 			Thread.sleep(10);

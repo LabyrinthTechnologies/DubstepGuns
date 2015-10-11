@@ -2,12 +2,15 @@ package Game;
 
 public class Player extends Entity
 {
+	public Player()
+	{
+		textureName = "defaultPlayer";
+		physics = true;
+	}
+	
 	@Override
 	public void Update()
 	{
-		textureName = "defaultPlayer";
-		super.Update();
-		
 		if(Main.listener.getW())
 		{
 			if(this.state == "standing")
@@ -29,5 +32,11 @@ public class Player extends Entity
 		{
 			this.setXVel(0);
 		}
+		
+		super.Update();
+		
+
+		
+		//System.out.println(xVel);
 	}
 }

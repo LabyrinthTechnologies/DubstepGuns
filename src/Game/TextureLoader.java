@@ -9,41 +9,43 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 
 
-public class TextureLoader 
+public class TextureLoader extends Loader
 {
 	public final int Player = 0;
 	
-	private ArrayList<String> textureSrc;
-	private ArrayList<String> textureName;
-	private Map<String, Image> textureMap;
+	/*private ArrayList<String> textureSrc;
+	private ArrayList<String> textureName;*/
+	//@Override
+	protected Map<String, Image> textureMap;
+
 	public Image[] textures;
 	
 	public TextureLoader()
 	{
-		textureSrc = new ArrayList<String>();
-		textureName = new ArrayList<String>();
+		super();
 		textureMap = new HashMap();
 	}
 	
-	public void addTexture(String src, String name)
+	/*public void addTexture(String src, String name)
 	{
-		textureSrc.add(src);
-		textureName.add(name);
-	}
+		Src.add(src);
+		Name.add(name);
+	}*/
 	
-	public Image textureFromString(String src)
+	public Image textureFromName(String src)
 	{
 		return textureMap.get(src);
 	}
 	
 	public void loadTextures()
 	{
-		textures = new Image[textureSrc.size()];
+		textures = new Image[Src.size()];
 		int loadingTexture = 0;
-		for (String src : textureSrc)
+		for (String src : Src)
 		{
-			textures[loadingTexture] = new ImageIcon(this.getClass().getResource(textureSrc.get(loadingTexture))).getImage();
-			textureMap.put(textureName.get(loadingTexture), textures[loadingTexture]);
+			textures[loadingTexture] = new ImageIcon(this.getClass().getResource(Src.get(loadingTexture))).getImage();
+			textureMap.put(Name.get(loadingTexture), textures[loadingTexture]);
+			new ImageIcon(textures[loadingTexture]);
 			loadingTexture++;
 		}
 	}

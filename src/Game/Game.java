@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -23,8 +22,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel 
 {
-	
-	public Image player;
+	AffineTransform tx;
+	AffineTransformOp op;
 	
 	public Game()
 	{
@@ -50,7 +49,27 @@ public class Game extends JPanel
 				g2d.drawImage(Main.ts.tiles[Main.level.renderLevel[x][y]], (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);	
 			}
 		}
-		g2d.drawImage(Main.tl.textureFromString(Main.player.textureName), Main.player.getPos().x - (int)Main.c.xPos, Main.player.getPos().y - (int)Main.c.yPos, Main.player.xSize, Main.player.ySize, this);
+		
+		for(Entity e : Main.entity)
+		{
+			Image tempImage = Main.tl.textureFromName(e.textureName);
+			new ImageIcon(tempImage);
+			tx = AffineTransform.getRotateInstance(Math.toRadians (e.rotation), e.rotCenterX, e.rotCenterY);
+			op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+			tempImage = op.filter(ToBuffImage(tempImage), null);
+		//System.out.println(Main.player.textureName);
+			g2d.drawImage(tempImage, e.getPos().x - (int)Main.c.xPos, e.getPos().y - (int)Main.c.yPos, e.xSize, e.ySize, this);
+		}
+	}
+	
+	public static BufferedImage ToBuffImage(Image im)
+	{
+		BufferedImage bi = new BufferedImage
+				(im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_RGB);
+		Graphics bg = bi.getGraphics();
+		bg.drawImage(im, 0, 0, null);
+		bg.dispose();
+		return bi;
 	}
 	
 }
