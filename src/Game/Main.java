@@ -21,6 +21,7 @@ public class Main
 	public static MusicPlayer mp = new MusicPlayer();
 	public static Tileset ts;
 	public static ArrayList<Entity> entity = new ArrayList<Entity>();
+	public static ArrayList<Entity> qued = new ArrayList<Entity>();
 	
 	//public static Player player = new Player();
 	public static Listener listener = new Listener();
@@ -45,6 +46,7 @@ public class Main
 	{
 		tl.addMap("/Textures/Thing.png", "defaultPlayer");
 		tl.addMap("/Textures/rhythmGun.png", "rhythmGun");
+		tl.addMap("/Textures/rhythmGunShot.png", "rhythmGunShot");
 		tl.loadTextures();
 	}
 	
@@ -68,7 +70,7 @@ public class Main
 		game = new Game();
 		setupGraphics();
 		frame.addKeyListener(listener);
-		frame.addMouseListener(mouse);
+		frame.getContentPane().addMouseListener(mouse);
 		entity.add(new Player());
 		entity.add(new RhythmGun());
 		entity.get(0).setPos(800, 400);
@@ -97,6 +99,12 @@ public class Main
 			{
 				e.Update();
 			}
+			
+			for (Entity e : qued)
+			{
+				entity.add(e);
+			}
+			qued = new ArrayList<Entity>();
 			
 			game.repaint();
 			Thread.sleep(10);

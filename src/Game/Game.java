@@ -24,6 +24,7 @@ public class Game extends JPanel
 {
 	AffineTransform tx;
 	AffineTransformOp op;
+	AffineTransform oldtx;
 	
 	public Game()
 	{
@@ -49,17 +50,24 @@ public class Game extends JPanel
 				g2d.drawImage(Main.ts.tiles[Main.level.renderLevel[x][y]], (x * Main.blockSize) - (int)Main.c.xPos, (y * Main.blockSize) - (int)Main.c.yPos, Main.blockSize, Main.blockSize, this);	
 			}
 		}
-		
+		oldtx = g2d.getTransform();
 		for(Entity e : Main.entity)
 		{
 			Image tempImage = Main.tl.textureFromName(e.textureName);
-			new ImageIcon(tempImage);
-			tx = AffineTransform.getRotateInstance(Math.toRadians (e.rotation), e.rotCenterX, e.rotCenterY);
-			op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-			tempImage = op.filter(ToBuffImage(tempImage), null);
+			//new ImageIcon(tempImage);
+			tx = new AffineTransform();
+			
+			tx.rotate(Math.toRadians(e.rotation), (e.rotCenterX + e.xPos) - Main.c.xPos, (e.rotCenterY + e.yPos) - Main.c.yPos);
+			//op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+			//tempImage = op.filter(ToBuffImage(tempImage), null);
 		//System.out.println(Main.player.textureName);
+			g2d.setTransform(tx);
+			
 			g2d.drawImage(tempImage, e.getPos().x - (int)Main.c.xPos, e.getPos().y - (int)Main.c.yPos, e.xSize, e.ySize, this);
+			g2d.setTransform(oldtx);
 		}
+		
+		g2d.drawOval((int)(Main.mouse.GetAdjustedX() - 2.5), (int)(Main.mouse.GetAdjustedY() - 2.5), 5, 5);
 	}
 	
 	public static BufferedImage ToBuffImage(Image im)

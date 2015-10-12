@@ -35,6 +35,16 @@ public class Player extends Entity
 		
 		super.Update();
 		
+		if(Main.c.xPos + (Main.c.xSize / 2) > xPos + (xSize / 2) + 1)
+		{
+			Main.c.cameraLeft(3);
+		}
+		else if(Main.c.xPos + (Main.c.xSize / 2) < xPos + (xSize / 2) - 1)
+		{
+			Main.c.cameraRight(3);
+		}
+		//Main.c.xPos = xPos + (xSize / 2);
+		
 
 		
 		//System.out.println(xVel);
