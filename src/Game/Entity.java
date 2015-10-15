@@ -1,6 +1,5 @@
 package Game;
 
-import java.awt.Image;
 import java.awt.Point;
 
 //import javax.swing.JFrame;
@@ -67,11 +66,6 @@ public class Entity
 		return new Point(xPos, yPos); 
 	}
 	
-	private Point toblock(int x, int y)
-	{
-		return new Point(x / Main.blockSize, (y / Main.blockSize));
-	}
-	
 	public void setPhysics(boolean onoff)
 	{
 		physics = onoff;
@@ -131,7 +125,7 @@ public class Entity
 				//system.out.println("pos non" + " (" + xPos + " " + yPos + ") (" + xVel + " " + yVel + ")");
 				//yPos = yPos + (int)yVel;
 				int tempx = xPos + xSize + (int)xVel;
-				int tempy = yPos;
+				//int tempy = yPos;
 				if(Main.level.level.length * Main.blockSize > tempx)
 				{
 					if(yPos%Main.blockSize == 0 || (yPos+ySize)%Main.blockSize == 0)
@@ -171,7 +165,7 @@ public class Entity
 				//system.out.println("neg non" + " " + xVel + " " + yVel);
 				//yPos = yPos + (int)yVel;
 				int tempx = xPos + (int)xVel;
-				int tempy = yPos;
+				//int tempy = yPos;
 				if(0 < tempx)
 				{
 					if(yPos%Main.blockSize == 0 || (yPos+ySize)%Main.blockSize == 0)
@@ -211,7 +205,7 @@ public class Entity
 			{
 				//system.out.println("non pos" + " " + xVel + " " + yVel);
 				//yPos = yPos + (int)yVel;
-				int tempx = xPos;
+				//int tempx = xPos;
 				int tempy = yPos + (int)yVel;
 				if(Main.level.level[0].length * Main.blockSize > tempy)
 				{
@@ -274,7 +268,7 @@ public class Entity
 			{
 				//system.out.println("non neg" + " " + xVel + " " + yVel);
 				//yPos = yPos + (int)yVel;
-				int tempx = xPos;
+				//int tempx = xPos;
 				int tempy = yPos + (int)yVel;
 				if(0 < tempy)
 				{

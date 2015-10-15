@@ -1,8 +1,5 @@
 package Game;
 
-import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class RhythmGun extends Entity
 {
@@ -25,7 +22,7 @@ public class RhythmGun extends Entity
 		xPos = Main.entity.get(0).xPos + 25;
 		yPos = Main.entity.get(0).yPos + 20;
 		
-		Point locpoint=new Point(xPos,yPos);
+		//Point locpoint = new Point(xPos,yPos);
 		float xDistance = (Main.mouse.GetAdjustedX()) - (xPos + rotCenterX - Main.c.xPos);
 		float yDistance = (Main.mouse.GetAdjustedY()) - (yPos + rotCenterY - Main.c.yPos);
 		//System.out.println(xDistance + " " + yDistance);

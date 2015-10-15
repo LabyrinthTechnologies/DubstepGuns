@@ -1,9 +1,7 @@
 package Game;
 
 import java.awt.Image;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
@@ -20,6 +18,7 @@ public class TextureLoader extends Loader
 
 	public Image[] textures;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public TextureLoader()
 	{
 		super();
@@ -47,6 +46,8 @@ public class TextureLoader extends Loader
 			textureMap.put(Name.get(loadingTexture), textures[loadingTexture]);
 			new ImageIcon(textures[loadingTexture]);
 			loadingTexture++;
+			Main.loaded++;
+			Main.game.repaint();
 		}
 	}
 }

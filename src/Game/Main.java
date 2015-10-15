@@ -22,6 +22,13 @@ public class Main
 	public static Tileset ts;
 	public static ArrayList<Entity> entity = new ArrayList<Entity>();
 	public static ArrayList<Entity> qued = new ArrayList<Entity>();
+	public static int playerNum;
+	//public static Interneter i;
+	public static boolean internet = false;
+	public static int gameState = 0;
+	public static int toLoad = 0;
+	public static int loaded = 0;
+	//public static Socket s;
 	
 	//public static Player player = new Player();
 	public static Listener listener = new Listener();
@@ -47,13 +54,11 @@ public class Main
 		tl.addMap("/Textures/Thing.png", "defaultPlayer");
 		tl.addMap("/Textures/rhythmGun.png", "rhythmGun");
 		tl.addMap("/Textures/rhythmGunShot.png", "rhythmGunShot");
-		tl.loadTextures();
 	}
 	
 	public static void loadMusic() throws UnsupportedAudioFileException, IOException
 	{
 		ml.addMap(level.musicSrc, level.musicName);
-		ml.loadMusic();
 	}
 	
 	/*public static void assignTextures()
@@ -63,14 +68,22 @@ public class Main
 
 	public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, IOException, LineUnavailableException 
 	{
-		ts = new Tileset(level.tileSrc);
-		loadTextures();
-		loadMusic();
 		//assignTextures();
 		game = new Game();
+		game.addMouseListener(mouse);
+		game.addMouseMotionListener(mouse);
+		//frame.addMouseListener(mouse);
 		setupGraphics();
+		loadTextures();
+		loadMusic();
+		ml.loadMusic();
+		tl.loadTextures();
+		toLoad = toLoad + 64;
+		ts = new Tileset(level.tileSrc);
+		gameState = 1;
 		frame.addKeyListener(listener);
-		frame.getContentPane().addMouseListener(mouse);
+		//i = new Interneter();
+		//i.connect();
 		entity.add(new Player());
 		entity.add(new RhythmGun());
 		entity.get(0).setPos(800, 400);
@@ -95,9 +108,13 @@ public class Main
 			
 			//physPlayer.Update();
 			//physPlayer.Update();
+			int inc = 0;
+			//qued = entity;
 			for (Entity e : entity)
 			{
 				e.Update();
+				//i.sendEntityInfo(inc);
+				inc++;
 			}
 			
 			for (Entity e : qued)

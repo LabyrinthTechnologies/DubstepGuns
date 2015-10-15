@@ -4,17 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.CropImageFilter;
-import java.awt.image.FilteredImageSource;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 //import javax.swing.JTextPane;
 
@@ -38,8 +32,7 @@ public class Game extends JPanel
 		return new Dimension (1000,700);
 	}
 	
-	@Override
-	public void paint(Graphics g) 
+	public void paintGame(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g;
 		
@@ -68,6 +61,33 @@ public class Game extends JPanel
 		}
 		
 		g2d.drawOval((int)(Main.mouse.GetAdjustedX() - 2.5), (int)(Main.mouse.GetAdjustedY() - 2.5), 5, 5);
+	}
+	
+	public void paintLoading(Graphics g)
+	{
+		Graphics2D g2d = (Graphics2D) g;
+		
+		g2d.setColor(Color.BLUE);
+		g2d.fillRect(0, 0, Main.c.xSize, Main.c.ySize);
+		float size = 600.0F * ((float) Main.loaded) / Main.toLoad;
+		g2d.setColor(Color.yellow);
+		g2d.fillRect(200, 500, 600, 20);
+		g2d.setColor(Color.green);
+		g2d.fillRect(200, 500, (int) size, 20);
+		System.out.println(Main.loaded + " " + size);
+	}
+	
+	@Override
+	public void paint(Graphics g) 
+	{
+		if (Main.gameState == 0)
+		{
+			paintLoading(g);
+		}
+		else if	(Main.gameState == 1)
+		{
+			paintGame(g);
+		}
 	}
 	
 	public static BufferedImage ToBuffImage(Image im)

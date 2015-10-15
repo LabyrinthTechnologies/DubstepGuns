@@ -1,11 +1,6 @@
 package Game;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -14,11 +9,13 @@ import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 
 
+
+
 //import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Tileset extends JPanel
 {
 	public Image tileset;
@@ -26,7 +23,7 @@ public class Tileset extends JPanel
 	public Image[] tiles;
 	public int tilesLoaded = 0;
 	
-	public Tileset(String src)
+	public Tileset(String src) throws InterruptedException
 	{
 		tiles = new Image[64];
 		tileset = new ImageIcon(this.getClass().getResource(src)).getImage();
@@ -47,7 +44,10 @@ public class Tileset extends JPanel
 					AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 					tiles[tilesLoaded] = op.filter(ToBuffImage(tiles[tilesLoaded]), null);
 					tilesLoaded++;
-					System.out.println(tilesLoaded);
+					Main.loaded++;
+					Main.game.repaint();
+					Thread.sleep(10);
+					//System.out.println(tilesLoaded);
 				}	
 			}
 		}

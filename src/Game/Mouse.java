@@ -7,8 +7,9 @@ import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-class Mouse implements MouseListener
+class Mouse implements MouseListener, MouseMotionListener
 {
 	public boolean isClicked = false;
 	
@@ -40,7 +41,8 @@ class Mouse implements MouseListener
 	
 	public float GetAdjustedX()
 	{
-		Point p = Main.frame.getLocation();
+		return adjX;
+		/*Point p = Main.frame.getLocation();
 		if(isOnscreen())
 		{
 			return (float) (GetRawPosX() - p.getX());
@@ -48,20 +50,12 @@ class Mouse implements MouseListener
 		else
 		{
 			return -10;
-		}
+		}*/
 	}
 	
 	public float GetAdjustedY()
 	{
-		Point p = Main.frame.getLocation();
-		if(isOnscreen())
-		{
-			return (float) (GetRawPosY() - p.getY());
-		}
-		else
-		{
-			return -10;
-		}
+		return adjY;
 	}
 
 	@Override
@@ -93,5 +87,22 @@ class Mouse implements MouseListener
 	public void mouseReleased(MouseEvent arg0) {
 		isClicked = false;
 		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public int adjX;
+	public int adjY;
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) 
+	{
+		adjX = arg0.getX();
+		adjY = arg0.getY();
+		System.out.println("greg");
 	}
 }
