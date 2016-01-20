@@ -108,13 +108,13 @@ public class Main
 			
 			//physPlayer.Update();
 			//physPlayer.Update();
-			int inc = 0;
+			//int inc = 0;
 			//qued = entity;
 			for (Entity e : entity)
 			{
 				e.Update();
 				//i.sendEntityInfo(inc);
-				inc++;
+				//inc++;
 			}
 			
 			for (Entity e : qued)

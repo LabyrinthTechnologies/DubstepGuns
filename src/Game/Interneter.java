@@ -21,7 +21,8 @@ public class Interneter
 		{
 			Main.frame.addWindowListener(new WindowAdapter()
 			{
-			    public void windowClosing(WindowEvent e)
+			    @SuppressWarnings("unused")
+				public void windowClosing(WindowEvent e)
 			    {
 			        try 
 			        {

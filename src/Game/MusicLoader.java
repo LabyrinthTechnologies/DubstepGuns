@@ -43,7 +43,7 @@ public class MusicLoader extends Loader
 		int loadingmusic = 0;
 		for (String src : Src)
 		{
-			music[loadingmusic] = (AudioSystem.getAudioInputStream(this.getClass().getResource(Src.get(loadingmusic))));
+			music[loadingmusic] = (AudioSystem.getAudioInputStream(this.getClass().getResource(src)));
 			musicMap.put(Name.get(loadingmusic), music[loadingmusic]);
 			loadingmusic++;
 			Main.loaded++;

@@ -42,7 +42,7 @@ public class TextureLoader extends Loader
 		int loadingTexture = 0;
 		for (String src : Src)
 		{
-			textures[loadingTexture] = new ImageIcon(this.getClass().getResource(Src.get(loadingTexture))).getImage();
+			textures[loadingTexture] = new ImageIcon(this.getClass().getResource(src)).getImage();
 			textureMap.put(Name.get(loadingTexture), textures[loadingTexture]);
 			new ImageIcon(textures[loadingTexture]);
 			loadingTexture++;
